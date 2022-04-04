@@ -48,6 +48,7 @@ header h1{
 
 .allTrans{
   padding: 5vh 20px;
+  min-height: 80vh;
 }
 
 .tranCon{
@@ -96,4 +97,5 @@ span{
 
 .addTransForm{
   padding: 5vh 15px;
+  min-height: 120vh;
 }
