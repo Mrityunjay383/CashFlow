@@ -1,13 +1,14 @@
   <%- include("header") -%>
 
   <div class="btnCon">
-    <a href="/addTrans">+/-</a>
+      <a href="/addTrans">+/-</a><br><br><br>
+      <a href="/preMonth">Previous Month</a>
   </div>
 
-
+  <% let filteredTrans = trans.filter((tran) => { return (tran.date.split("-")[0] == currYear && tran.date.split("-")[1] == currMonth) });%>
 
   <div class="allTrans">
-    <% for(tran of trans){%>
+    <% for(tran of filteredTrans){%>
       <div class="tranCon">
         <div class="leftCon">
           <% if(tran.type == 'in'){%>

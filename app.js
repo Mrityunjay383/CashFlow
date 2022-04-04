@@ -23,7 +23,25 @@ const Trans = mongoose.model("transition", transSchema);
 
 app.get("/", async (req, res) => {
   await Trans.find((err, foundTrans) => {
-    res.render("index.ejs", {trans: foundTrans, currAmount: 0});
+    const currDate = new Date();
+    res.render("index", {
+      trans: foundTrans,
+      currAmount: 0,
+      currYear: currDate.getFullYear(),
+      currMonth: currDate.getMonth()+1,
+    });
+  }).clone();
+});
+
+app.get("/preMonth", async(req, res) => {
+  await Trans.find((err, foundTrans) => {
+    const currDate = new Date();
+    res.render("preM", {
+      trans: foundTrans,
+      currAmount: 0,
+      currYear: currDate.getFullYear(),
+      currMonth: currDate.getMonth()+1,
+    });
   }).clone();
 });
 
