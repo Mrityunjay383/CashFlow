@@ -23,7 +23,7 @@ const Trans = mongoose.model("transition", transSchema);
 
 app.get("/", async (req, res) => {
   await Trans.find((err, foundTrans) => {
-    res.render("index.ejs", {trans: foundTrans});
+    res.render("index.ejs", {trans: foundTrans, currAmount: 0});
   }).clone();
 });
 

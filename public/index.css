@@ -1,3 +1,7 @@
+html{
+  overflow-x: hidden;
+}
+
 body{
   background: #ECECEC;
 }
@@ -70,9 +74,23 @@ span{
 
 .inAmo{
   color: #44B49B;
+  font-weight: bolder;
 }
 .exAmo{
   color: #E70074;
+  font-weight: bolder;
+}
+
+.curr{
+  display: flex;
+  background: #fff;
+  justify-content: space-between;
+  padding: 10px 20px;
+  font-weight: bolder;
+  position: sticky;
+  bottom: 0;
+  width: 99%;
+  margin: auto;
 }
 
 .addTransForm{

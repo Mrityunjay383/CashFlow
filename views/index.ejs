@@ -4,22 +4,37 @@
     <a href="/addTrans">+/-</a>
   </div>
 
+
+
   <div class="allTrans">
     <% for(tran of trans){%>
       <div class="tranCon">
         <div class="leftCon">
           <% if(tran.type == 'in'){%>
             <span class="inAmo">Rs.<%= tran.amount%></span>
+            <% currAmount += tran.amount %>
           <%}else{%>
             <span class="exAmo">Rs.<%= tran.amount%></span>
+            <% currAmount -= tran.amount %>
           <%}%>
-          <span><%= tran.date%></span>
+            <span><%= tran.date%></span>
         </div>
         <div class="rightCon">
           <span><%= tran.des%></span>
         </div>
       </div>
     <%}%>
+  </div>
+
+    <div class="curr">
+      <span>In Hand: </span>
+      <span>
+        <% if(currAmount >= 0){%>
+          <span class="inAmo">Rs.<%= currAmount%></span>
+        <%}else{%>
+          <span class="exAmo">Rs.<%= currAmount*-1%></span>
+        <%}%>
+      </span>
     </div>
   </body>
 </html>
