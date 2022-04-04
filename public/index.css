@@ -1,0 +1,80 @@
+body{
+  background: #ECECEC;
+}
+header{
+  box-shadow: 0px 3px 2px 1px rgb(0 0 0 / 20%);
+  padding: 10px 20px;
+  background: #E70074;
+  color: #fff;
+}
+header h1{
+  font-size: 1.4rem;
+}
+
+.btnCon{
+  text-align: center;
+  padding: 5vh 0;
+}
+
+.btnCon a {
+  background: #E70074;
+  border-radius: 999px;
+  box-shadow: #E70074 0 10px 20px -10px;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  opacity: 1;
+  outline: 0 solid transparent;
+  padding: 8px 18px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: fit-content;
+  word-break: break-word;
+  border: 0;
+  transition: 0.7s ease;
+}
+
+.btnCon a:hover {
+  text-decoration: none;
+}
+
+.allTrans{
+  padding: 5vh 20px;
+}
+
+.tranCon{
+  margin: 13px 13px 18px;
+  background: #fff;
+  border-radius: 5px;
+  padding: 10px 15px;
+  box-shadow: 0px 5px 10px 5px rgb(230 230 230);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.leftCon, .rightCon{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* align-items: center; */
+}
+
+span{
+  padding: 10px 0;
+}
+
+.inAmo{
+  color: #44B49B;
+}
+.exAmo{
+  color: #E70074;
+}
+
+.addTransForm{
+  padding: 5vh 15px;
+}

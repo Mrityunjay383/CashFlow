@@ -1,0 +1,32 @@
+  <%- include("header") -%>
+
+
+
+  <form class="addTransForm" action="/addTrans" method="post">
+    <div class="form-group">
+      <label for="action">Choose Type: </label><br>
+      <select class="form-select" name="action" aria-label="Default select example">
+        <option selected></option>
+        <option value="in">Income</option>
+        <option value="ex">Expence</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="amo">Amount: </label>
+      <input type="number" class="form-control" name="amo" placeholder="Enter Amount">
+    </div>
+    <div class="form-group">
+      <label for="date">Date: </label>
+      <input type="date" class="form-control" name="date">
+    </div>
+    <div class="form-group">
+      <label for="des">Description: </label>
+      <input type="text" class="form-control" name="des" placeholder="Type Description">
+    </div>
+
+    <button type="submit" class="btn btn-success">Add</button>
+  </form>
+
+  </body>
+
+  </html>
