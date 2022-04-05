@@ -26,7 +26,8 @@ app.get("/", async (req, res) => {
     const currDate = new Date();
     res.render("index", {
       trans: foundTrans,
-      currAmount: 0,
+      currIn: 0,
+      currEx: 0,
       currYear: currDate.getFullYear(),
       currMonth: currDate.getMonth()+1,
     });
@@ -38,7 +39,8 @@ app.get("/preMonth", async(req, res) => {
     const currDate = new Date();
     res.render("preM", {
       trans: foundTrans,
-      currAmount: 0,
+      currIn: 0,
+      currEx: 0,
       currYear: currDate.getFullYear(),
       currMonth: currDate.getMonth()+1,
     });

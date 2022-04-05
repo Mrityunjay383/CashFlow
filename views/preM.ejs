@@ -13,10 +13,10 @@
       <div class="leftCon">
         <% if(tran.type == 'in'){%>
           <span class="inAmo">Rs.<%= tran.amount%></span>
-          <% currAmount += tran.amount %>
+          <% currIn += tran.amount %>
         <%}else{%>
           <span class="exAmo">Rs.<%= tran.amount%></span>
-        <% currAmount -= tran.amount %>
+        <% currEx += tran.amount %>
         <%}%>
           <span><%= tran.date%></span>
       </div>
@@ -27,15 +27,23 @@
   <%}%>
 </div>
 
-  <div class="curr">
-    <span>In Hand: </span>
-    <span>
-      <% if(currAmount >= 0){%>
-        <span class="inAmo">Rs.<%= currAmount%></span>
-        <%}else{%>
-        <span class="exAmo">Rs.<%= currAmount*-1%></span>
-      <%}%>
-    </span>
-  </div>
+<div class="inExCon">
+  <span class="inAmo">Rs.<%= currIn%></span>
+  <span class="exAmo">Rs.<%= currEx%></span>
+</div>
+
+<div class="curr">
+  <span>In Hand: </span>
+  <span>
+    <% let inHand = currIn - currEx%>
+    <% if(inHand >= 0){%>
+      <span class="inAmo">Rs.<%= inHand%></span>
+    <%}else{%>
+      <span class="exAmo">Rs.<%= inHand*-1%></span>
+    <%}%>
+  </span>
+</div>
+
+
 </body>
 </html>
