@@ -21,6 +21,8 @@ const transSchema = new mongoose.Schema({
 });
 const Trans = mongoose.model("transition", transSchema);
 
+app.get("/hello");
+
 app.get("/", async (req, res) => {
   await Trans.find((err, foundTrans) => {
     const currDate = new Date();
