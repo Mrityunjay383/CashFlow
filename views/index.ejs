@@ -23,7 +23,9 @@
           <span><%= tran.date%></span>
       </div>
       <div class="rightCon">
-        <button class="delBtn" type="submit" name="delBtn" value="<%= tran._id%>+main"><i class="fa-solid fa-xmark"></i></button>
+        <form class="" action="/delTrans" method="post">
+          <button class="delBtn" type="submit" name="delBtn" value="<%= tran._id%>+main"><i class="fa-solid fa-xmark"></i></button>
+        </form>
         <span><%= tran.des%></span>
       </div>
     </div>
