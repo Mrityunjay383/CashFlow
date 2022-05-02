@@ -5,14 +5,28 @@ const ejs = require("ejs");
 const mongoose = require('mongoose');
 const session = require('express-session');
 
+const {
+  checkAuth
+} = require('./Midlewares/auth.js');
+
 const app = express();
 
 app.set('view engine', 'ejs');
 
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 app.use(express.static("public"));
 
-mongoose.connect(process.env.DATABASE_URL, {useUnifiedTopology: true});
+app.use(session({
+  secret: process.env.SECRET,
+  resave: false,
+  saveUninitialized: false
+}));
+
+mongoose.connect(process.env.DATABASE_URL, {
+  useUnifiedTopology: true
+});
 
 const transSchema = new mongoose.Schema({
   amount: Number,
@@ -23,7 +37,8 @@ const transSchema = new mongoose.Schema({
 const Trans = mongoose.model("transition", transSchema);
 
 
-app.get("/", async (req, res) => {
+app.get("/", checkAuth, async (req, res) => {
+
   await Trans.find((err, foundTrans) => {
     const currDate = new Date();
     res.render("index", {
@@ -31,12 +46,12 @@ app.get("/", async (req, res) => {
       currIn: 0,
       currEx: 0,
       currYear: currDate.getFullYear(),
-      currMonth: currDate.getMonth()+1,
+      currMonth: currDate.getMonth() + 1,
     });
   }).clone();
 });
 
-app.get("/preMonth", async(req, res) => {
+app.get("/preMonth", checkAuth, async (req, res) => {
   await Trans.find((err, foundTrans) => {
     const currDate = new Date();
     res.render("preM", {
@@ -44,12 +59,12 @@ app.get("/preMonth", async(req, res) => {
       currIn: 0,
       currEx: 0,
       currYear: currDate.getFullYear(),
-      currMonth: currDate.getMonth()+1,
+      currMonth: currDate.getMonth() + 1,
     });
   }).clone();
 });
 
-app.get("/addTrans", (req, res) => {
+app.get("/addTrans", checkAuth,  (req, res) => {
   res.render("addTrans");
 });
 
@@ -69,16 +84,35 @@ app.post("/delTrans", async (req, res) => {
   const page = req.body.delBtn.split("+")[1];
 
 
-  await Trans.findOneAndDelete({_id: transId}, (err) => {
-    if(!err){
-      if(page == "main"){
+  await Trans.findOneAndDelete({
+    _id: transId
+  }, (err) => {
+    if (!err) {
+      if (page == "main") {
         res.redirect("/");
-      }else{
+      } else {
         res.redirect("/preMonth")
       }
     }
   }).clone();
 });
+
+app.get("/login", (req, res) => {
+  res.render("login");
+});
+
+app.post("/login", (req, res) => {
+
+
+  if (process.env.USER == req.body.userName && process.env.PASSWORD == req.body.password) {
+    req.session.isLogedin = true;
+    res.redirect("/");
+  } else {
+    res.redirect("/login");
+  }
+
+})
+
 
 app.listen(process.env.PORT || 3000, () => {
   console.log("Server is running");
