@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const ejs = require("ejs");
 const mongoose = require('mongoose');
+const session = require('express-session');
 
 const app = express();
 
@@ -21,7 +22,6 @@ const transSchema = new mongoose.Schema({
 });
 const Trans = mongoose.model("transition", transSchema);
 
-app.get("/hello");
 
 app.get("/", async (req, res) => {
   await Trans.find((err, foundTrans) => {
@@ -62,6 +62,22 @@ app.post("/addTrans", async (req, res) => {
   });
 
   res.redirect("/");
+});
+
+app.post("/delTrans", async (req, res) => {
+  const transId = req.body.delBtn.split("+")[0];
+  const page = req.body.delBtn.split("+")[1];
+
+
+  await Trans.findOneAndDelete({_id: transId}, (err) => {
+    if(!err){
+      if(page == "main"){
+        res.redirect("/");
+      }else{
+        res.redirect("/preMonth")
+      }
+    }
+  }).clone();
 });
 
 app.listen(process.env.PORT || 3000, () => {

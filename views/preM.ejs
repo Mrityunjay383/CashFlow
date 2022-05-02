@@ -7,6 +7,9 @@
 <% let preMonth; if(currMonth == 1){preMonth = 12}else{preMonth = currMonth-1}%>
 <% let filteredTrans = trans.filter((tran) => { return (tran.date.split("-")[0] == currYear && tran.date.split("-")[1] == preMonth) });%>
 
+<% filteredTrans.sort(function(a, b) { return new Date(a.date) - new Date(b.date) }) %>
+
+
 <div class="allTrans">
   <% for(tran of filteredTrans){%>
     <div class="tranCon">
@@ -21,6 +24,9 @@
           <span><%= tran.date%></span>
       </div>
       <div class="rightCon">
+        <form class="" action="/delTrans" method="post">
+          <button class="delBtn" type="submit" name="delBtn" value="<%= tran._id%>+pre"><i class="fa-solid fa-xmark"></i></button>
+        </form>
         <span><%= tran.des%></span>
       </div>
     </div>

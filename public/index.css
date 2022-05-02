@@ -112,3 +112,21 @@ span{
   padding: 5vh 15px;
   min-height: 100vh;
 }
+
+.rightCon{
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.delBtn{
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  padding: 0;
+  font-size: 12px;
+  border: 0;
+  outline: 0;
+  background: #E70074;
+  color: #fff;
+  margin: 10px 0;
+}
