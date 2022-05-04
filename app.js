@@ -21,7 +21,10 @@ app.use(express.static("public"));
 app.use(session({
   secret: process.env.SECRET,
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie : {
+       maxAge: 1000* 60 * 60 *24 * 30
+  }
 }));
 
 mongoose.connect(process.env.DATABASE_URL, {
