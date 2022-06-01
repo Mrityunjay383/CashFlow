@@ -40,7 +40,7 @@ const transSchema = new mongoose.Schema({
 const Trans = mongoose.model("transition", transSchema);
 
 
-app.get("/", async (req, res) => {
+app.get("/", checkAuth, async (req, res) => {
 
   await Trans.find((err, foundTrans) => {
     const currDate = new Date();
@@ -56,22 +56,19 @@ app.get("/", async (req, res) => {
 
 app.get("/preMonth", checkAuth, async (req, res) => {
   await Trans.find((err, foundTrans) => {
-    const currDate = new Date();
     res.render("preM", {
       trans: foundTrans,
       currIn: 0,
-      currEx: 0,
-      currYear: currDate.getFullYear(),
-      currMonth: currDate.getMonth() + 1,
+      currEx: 0
     });
   }).clone();
 });
 
-app.get("/addTrans",  (req, res) => {
+app.get("/addTrans", checkAuth, (req, res) => {
   res.render("addTrans");
 });
 
-app.post("/addTrans", async (req, res) => {
+app.post("/addTrans", checkAuth, async (req, res) => {
   const newTrans = await Trans.create({
     amount: req.body.amo,
     des: req.body.des,
@@ -82,7 +79,7 @@ app.post("/addTrans", async (req, res) => {
   res.redirect("/");
 });
 
-app.post("/delTrans", async (req, res) => {
+app.post("/delTrans", checkAuth, async (req, res) => {
   const transId = req.body.delBtn.split("+")[0];
   const page = req.body.delBtn.split("+")[1];
 

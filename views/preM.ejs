@@ -4,52 +4,59 @@
   <a href="/">Back</a>
 </div>
 
-<% let preMonth; if(currMonth == 1){preMonth = 12}else{preMonth = currMonth-1}%>
-<% let filteredTrans = trans.filter((tran) => { return (tran.date.split("-")[0] == currYear && tran.date.split("-")[1] == preMonth) });%>
-
-<% filteredTrans.sort(function(a, b) { return new Date(a.date) - new Date(b.date) }) %>
-
-
-<div class="allTrans">
-  <% for(tran of filteredTrans){%>
-    <div class="tranCon">
-      <div class="leftCon">
-        <% if(tran.type == 'in'){%>
-          <span class="inAmo">Rs.<%= tran.amount%></span>
-          <% currIn += tran.amount %>
-        <%}else{%>
-          <span class="exAmo">Rs.<%= tran.amount%></span>
-        <% currEx += tran.amount %>
-        <%}%>
-          <span><%= tran.date%></span>
-      </div>
-      <div class="rightCon">
-        <form class="" action="/delTrans" method="post">
-          <button class="delBtn" type="submit" name="delBtn" value="<%= tran._id%>+pre"><i class="fa-solid fa-xmark"></i></button>
-        </form>
-        <span><%= tran.des%></span>
-      </div>
-    </div>
-  <%}%>
+<div class="">
+  <span>Choose Month:</span>
+  <select id="monthIndex">
+    <option value="1">Last Month</option>
+    <option value="2">Last 2nd Month</option>
+    <option value="3">Last 3nd Month</option>
+    <option value="4">Last 4nd Month</option>
+    <option value="5">Last 5nd Month</option>
+    <option value="6">Last 6nd Month</option>
+    <option value="7">Last 7nd Month</option>
+  </select>
 </div>
 
-<div class="inExCon">
-  <span class="inAmo">Rs.<%= currIn%></span>
-  <span class="exAmo">Rs.<%= currEx%></span>
-</div>
+<div id="container"></div>
 
-<div class="curr">
-  <span>In Hand: </span>
-  <span>
-    <% let inHand = currIn - currEx%>
-    <% if(inHand >= 0){%>
-      <span class="inAmo">Rs.<%= inHand%></span>
-    <%}else{%>
-      <span class="exAmo">Rs.<%= inHand*-1%></span>
-    <%}%>
-  </span>
-</div>
+  <script type="text/javascript" src="/pretransFunc.js"></script>
 
+  <script type="text/javascript">
 
+    function getTransArr(selectMonth){
+      let currDate = new Date();
+      let currYear= currDate.getFullYear(), currMonth = currDate.getMonth() + 1;
+
+      let preMonth;
+
+      if(currMonth - selectMonth == 0){
+        preMonth = 12
+      }else{
+        preMonth = currMonth-selectMonth;
+      }
+
+      let trans = <%- JSON.stringify(trans)%>
+
+      let filteredTrans = trans.filter((tran) => {
+        return (tran.date.split("-")[0] == currYear && tran.date.split("-")[1] == preMonth)
+      });
+
+      filteredTrans.sort(function(a, b) { return new Date(a.date) - new Date(b.date) });
+    
+      return filteredTrans;
+    }
+
+    const monthIndexEle = document.getElementById("monthIndex");
+
+    let transArr = getTransArr(monthIndexEle.value);
+    populateTrans(transArr)
+
+    monthIndexEle.addEventListener("change", () => {
+      transArr = getTransArr(monthIndexEle.value);
+      populateTrans(transArr);
+    })
+
+  </script>
 </body>
+
 </html>
