@@ -40,7 +40,7 @@ const transSchema = new mongoose.Schema({
 const Trans = mongoose.model("transition", transSchema);
 
 
-app.get("/", checkAuth, async (req, res) => {
+app.get("/", async (req, res) => {
 
   await Trans.find((err, foundTrans) => {
     const currDate = new Date();
@@ -67,7 +67,7 @@ app.get("/preMonth", checkAuth, async (req, res) => {
   }).clone();
 });
 
-app.get("/addTrans", checkAuth,  (req, res) => {
+app.get("/addTrans",  (req, res) => {
   res.render("addTrans");
 });
 

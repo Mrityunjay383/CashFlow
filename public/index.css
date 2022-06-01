@@ -134,3 +134,20 @@ span{
 .loginCon{
   padding: 10vh 20px;
 }
+
+.checkCon{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding: 0;
+  margin: 0 0 10px;
+  opacity: 0.5;
+}
+.checkCon span{
+  margin-right: 25px;
+  padding: 0;
+}
+
+.hide{
+  display: none;
+}

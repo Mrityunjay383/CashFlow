@@ -11,14 +11,21 @@
         <option value="ex">Expense</option>
       </select>
     </div>
+
     <div class="form-group">
       <label for="amo">Amount: </label>
       <input type="number" class="form-control" name="amo" placeholder="Enter Amount">
     </div>
+
     <div class="form-group">
       <label for="date">Date: </label>
-      <input type="date" class="form-control" name="date">
+      <div class="checkCon">
+        <span>Today:</span>
+        <input id="dateCheckbox" type="checkbox" name="" value="" checked>
+      </div>
+      <input id="dateInp" type="date" class="form-control hide" name="date">
     </div>
+
     <div class="form-group">
       <label for="des">Description: </label>
       <input type="text" class="form-control" name="des" placeholder="Type Description" autocomplete="off">
@@ -28,5 +35,40 @@
   </form>
 
   </body>
+
+  <script type="text/javascript">
+
+    const formatTodaysDate = () => {
+      let m = new Date()
+      let month = m.getMonth()+1;
+      let date = m.getDate();
+
+
+      if(month < 10){
+        month = "0"+month;
+      }
+      if(date < 10){
+        date = "0"+date;
+      }
+
+      let todaysDate = m.getFullYear() +"-"+ month +"-"+ date;
+      return todaysDate;
+    }
+
+
+    const dateCheckbox = document.getElementById("dateCheckbox");
+    const dateInp = document.getElementById("dateInp");
+
+    dateInp.value = formatTodaysDate();
+
+    dateCheckbox.addEventListener("click", () => {
+      if(dateCheckbox.checked){
+        dateInp.classList.add("hide");
+        dateInp.value = formatTodaysDate();
+      }else{
+        dateInp.classList.remove("hide");
+      }
+    });
+  </script>
 
   </html>
