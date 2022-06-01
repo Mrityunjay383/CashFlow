@@ -46,6 +46,12 @@ header h1{
   text-decoration: none;
 }
 
+.selectCon{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .allTrans{
   padding: 5vh 20px;
   min-height: 80vh;

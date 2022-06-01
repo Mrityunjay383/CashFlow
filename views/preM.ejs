@@ -4,7 +4,7 @@
   <a href="/">Back</a>
 </div>
 
-<div class="">
+<div class="selectCon">
   <span>Choose Month:</span>
   <select id="monthIndex">
     <option value="1">Last Month</option>
@@ -42,7 +42,7 @@
       });
 
       filteredTrans.sort(function(a, b) { return new Date(a.date) - new Date(b.date) });
-    
+
       return filteredTrans;
     }
 
